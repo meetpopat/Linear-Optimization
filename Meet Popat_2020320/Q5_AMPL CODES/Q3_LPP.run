@@ -1,0 +1,27 @@
+reset;
+
+var y1 binary;
+var y2 binary;
+var y3 binary;
+var y4 binary;
+
+#var y1 >= 0, <= 1;
+#var y2 >= 0, <= 1;
+#var y3 >= 0, <= 1;
+#var y4 >= 0, <= 1;
+
+minimize z : y1 + y2 + y3 + y4;
+
+s.t. c1: y1 + y2 >= 1;
+s.t. c2: y2 + y3 >= 1;
+s.t. c3: y2 + y4 >= 1;
+s.t. c4: y3 + y4 >= 1;
+
+option solver cplex;
+solve;
+
+print "";
+print "Optimal Value Of The Objective Function";
+display z;
+print "Value of The Variables Giving Optimal Value";
+display y1, y2, y3, y4;

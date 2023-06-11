@@ -1,0 +1,27 @@
+reset;
+
+var x12 binary;
+var x23 binary;
+var x24 binary;
+var x34 binary;
+
+#var x12 >= 0, <= 1;
+#var x23 >= 0, <= 1;
+#var x24 >= 0, <= 1;
+#var x34 >= 0, <= 1;
+
+maximize z : x12 + x23 + x24 + x34;
+
+s.t. c1: x12 <= 1;
+s.t. c2: x12 + x24 + x23 <= 1;
+s.t. c3: x23 + x34 <= 1;
+s.t. c4: x24 + x34 <= 1;
+
+option solver cplex;
+solve;
+
+print "";
+print "Optimal Value Of The Objective Function";
+display z;
+print "Value of The Variables Giving Optimal Value";
+display x12, x23, x24, x34;
